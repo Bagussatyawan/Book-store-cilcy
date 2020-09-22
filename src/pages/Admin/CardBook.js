@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { ProductWrapper } from '../Product/ProductStyles';
 import { Button } from '../../components/Button/Button';
-import Axios from 'axios';
-import { HOST } from '../../services/Api';
-import qs from 'querystring';
+// import Axios from 'axios';
+// import { HOST } from '../../services/Api';
+// import qs from 'querystring';
 
 function CardBook({ book }) {
 

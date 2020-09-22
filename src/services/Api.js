@@ -1,1 +1,1 @@
-export const HOST = 'http://localhost:9000/api/v1';
+export const HOST = 'http://localhost:6969/api/v1';
