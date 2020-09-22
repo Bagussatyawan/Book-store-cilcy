@@ -1,38 +1,138 @@
-.App {
+#root {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+/* //Root Container */
+.root-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 65px;
+}
+
+.box-controller {
+  visibility: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 24em;
+  min-width: 24em;
+  height: 35px;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
+  margin-bottom: 30px;
+  align-items: center;
+  transition: visibility 0.5s ease-out;
+}
+
+.controller {
+  flex: 1;
   text-align: center;
+  height: 100%;
+  line-height: 2;
+  cursor: pointer;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.controller:hover{
+color: lightblue;
+border: 2px solid yellow;
+background-color: navy;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.box-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  max-width: 24em;
+  min-width: 21em;
+  box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.inner-container {
+  transition: visibility 0.2s ease-out;
+}
+
+.inner-container.show {
+  visibility: visible;
+}
+
+/* //Header */
+.box-header {
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 17px;
+  /* margin-left: 35px; */
+  /* margin-right: 35px; */
+  font-family: sans-serif;
+  font-size: 22px;
+  /* border-bottom: 2px solid navy; */
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* //Input */
+.login-input {
+  height: 3px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  transition: border 0.4s ease-out;
+  padding: 20px;
+  font-family: sans-serif;
+  font-size: 19px;
+  color: #3e3e42;
+  background: rgba(15, 15, 15, 0.01);
+}
+
+.login-input:hover {
+  border: 2px solid gray;
+}
+
+.login-input:focus {
+  border: 2px solid gray;
+  box-shadow: 0px 0px 20px rgba(15, 15, 15, 0.2);
+}
+
+/* //Input Placeholder */
+.login-input::placeholder {
+  font-family: sans-serif;
+  font-size: 16px; 
+  color: rgba(15, 15, 15, 0.4);
+}
+
+.login-btn {
+  padding: 2px 30px;
+  border: 0;
+  font-size: 18px;
+  border-radius: 3px;
+  font-family: Oxygen, sans-serif;
+  background-color: rgba(15, 15, 15, 0.03);
+  margin-top: 20px;
+  border: 2px solid navy;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  background-color: rgb(223, 223, 20);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
