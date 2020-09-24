@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Title from '../../../src/components/Title/Title'
+import Title from '../../components/Title/Title';
 import { HOST } from '../../services/Api';
 import axios from 'axios';
-import CardBook from './CardBook';
+import CardBooks from './CardBooks';
 
-export default class Books extends Component {
+export default class AllBooks extends Component {
     state = {
         book: []
     };
@@ -19,12 +19,12 @@ export default class Books extends Component {
 
         const renderData =
             this.state.book.length > 0 &&
-            this.state.book.map((book) => <CardBook book={book} key={book.id} refresh={this.componentDidMount} />);
+            this.state.book.map((book) => <CardBooks book={book} key={book.id} />);
 
         return (
             <div className="py-5">
                 <div className="container">
-                    <Title name="All Admin " title="List Book" />
+                    <Title name="All " title="List Book" />
                     <div className="row">
                         {renderData}
                     </div>

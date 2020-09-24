@@ -29,7 +29,7 @@ export default class loginn extends Component {
 
         login(user).then(res => {
             if (res) {
-                this.props.history.push("/book-list")
+                this.props.history.push("/home")
             }
         })
     }

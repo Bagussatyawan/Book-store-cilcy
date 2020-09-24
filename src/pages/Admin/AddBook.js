@@ -2,27 +2,38 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { HOST } from '../../services/Api';
 import qs from 'querystring';
+import Title from '../../../src/components/Title/Title';
 
 export default class AddBook extends Component {
     state = {
         name: "",
-        image_url: "",
+        thumbnail: "",
         author: "",
         price: "",
         description: "",
         no_isbn: "",
         weight: "",
+        category_id: "",
         disabled: false
     };
 
     handlerChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value })
+        let formData = new FormData();
+        if (e.target.name === 'thumbnail') {
+            formData.append('thumbnail', e.target.files[0], e.target.files[0].name)
+        }
+
+
+
+
+        this.setState({ [e.target.name]: e.target.name === 'thumbnail' ? formData : e.target.value })
     };
     // METHOD UNTUK CREATE BOOK
     handlerSubmit = async (event) => {
         event.preventDefault();
         this.setState({ disabled: true })
-        await Axios.post(`${HOST}/product/create`, qs.stringify(this.state), {
+        console.log('STATEYGDIKIRIM', this.state)
+        await Axios.post(`${HOST}/product/create`, this.state, {
             headers: { Authorization: `Bearer ${JSON.stringify(localStorage.getItem('usertoken'))}` }
         });
         this.props.history.push("/book-list")
@@ -31,9 +42,9 @@ export default class AddBook extends Component {
     render() {
         return (
             <div className="container">
+                <Title name="Add New " title="Book" />
                 <div className="col-md-6">
-                    <h2>Add Book</h2>
-                    <form onSubmit={this.handlerSubmit}>
+                    <form onSubmit={this.handlerSubmit} encType='multipart/form-data'>
                         <div className="form-group">
                             <label htmlFor="name">Book Title</label>
                             <input
@@ -68,13 +79,14 @@ export default class AddBook extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="image_url">Img_Url</label>
+                            <label htmlFor="thumbnail">Img_Url</label>
                             <input
-                                type="text"
+                                type="file"
                                 className="form-control"
                                 required
                                 onChange={this.handlerChange}
-                                name="image_url"
+                                name="thumbnail"
+                                accept=".jpg, .png"
                             />
                         </div>
 
@@ -108,6 +120,17 @@ export default class AddBook extends Component {
                                 required
                                 onChange={this.handlerChange}
                                 name="weight"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="category_id">Category_id</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                required
+                                onChange={this.handlerChange}
+                                name="category_id"
                             />
                         </div>
 

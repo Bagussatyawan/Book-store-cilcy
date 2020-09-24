@@ -38,41 +38,45 @@ export default class Navbar extends Component {
         );
 
         return (
+            <div>
+                <nav className="navbar navbar-expand navbar-light bg-light">
+                    <a href="/home" className="navbar-brand">
+                        Cilcy.com  </a>
+                    <div className="navbar-nav mr-auto"
+                        id="navbar1">
+                        <ul className="nav navbar-nav navbar-right">
 
-            <nav className="navbar navbar-expand navbar-light bg-light ">
-                <a href="/home" className="navbar-brand">
-                    Cilcy.com  </a>
-                <div className="navbar-nav mr-auto"
-                    id="navbar1">
+                            <li className="nav-item">
+                                <form className="form-inline ">
+                                    <input className="form-control mr-sm-2" type="search" placeholder="Cari Produk, Judul Buku, Penulis" aria-label="Search" />
+                                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/cart" className="nav-link">
+                                    <i className="fas fa-cart-plus">
+                                        <span className="span-cart">0</span>
+                                    </i>
+                                </Link>
+                            </li>
+                        </ul>
+
+                    </div>
+                    {localStorage.usertoken ? userLink : loginRegLink}
+                </nav>
+                <nav className="navbar navbar-expand navbar-light bg-light">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link to="/admin" className="nav-link">
-                                Add Book
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/book-list" className="nav-link">
-                                Book List
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <form className="form-inline ">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Cari Produk, Judul Buku, Penulis" aria-label="Search" />
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/cart" className="nav-link">
-                                <i className="fas fa-cart-plus">
-                                    <span className="span-cart">0</span>
-                                </i>
-                            </Link>
-                        </li>
-                    </ul>
+                        <li className="nav-item"><Link className="nav-link" to="/semua-koleksi-buku">SEMUA KOLEKSI BUKU</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/buku-baru">BUKU BARU</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/buku-pilihan">BUKU PILIHAN</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/nasional-best-seller">NASIONAL BEST SELLER</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/buku-import">BUKU IMPORT</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to='/admin-navbar'>ADMIN</Link></li>
 
-                </div>
-                {localStorage.usertoken ? userLink : loginRegLink}
-            </nav>
+                    </ul>
+                </nav>
+
+            </div>
         )
     }
 }

@@ -2,29 +2,29 @@ import React, { Component } from 'react';
 import Title from '../../../src/components/Title/Title'
 import { HOST } from '../../services/Api';
 import axios from 'axios';
-import CardBook from './CardBook';
+import CategoryTable from './CategoryTable'
 
-export default class Books extends Component {
+export default class Categories extends Component {
     state = {
-        book: []
+        category: []
     };
 
     componentDidMount = async () => {
-        await axios.get(`${HOST}/product/all`)
+        await axios.get(`${HOST}/categories/all`)
             .then(response => this.setState({
-                book: response.data.data.rows
+                category: response.data.data.rows
             }))
     };
     render() {
 
         const renderData =
-            this.state.book.length > 0 &&
-            this.state.book.map((book) => <CardBook book={book} key={book.id} refresh={this.componentDidMount} />);
+            this.state.category.length > 0 &&
+            this.state.category.map((category) => <CategoryTable category={category} key={category.id} />);
 
         return (
             <div className="py-5">
                 <div className="container">
-                    <Title name="All Admin " title="List Book" />
+                    <Title name="Category " title="List " />
                     <div className="row">
                         {renderData}
                     </div>

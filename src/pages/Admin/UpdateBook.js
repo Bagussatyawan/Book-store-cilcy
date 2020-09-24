@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import qs from 'querystring';
 import { HOST } from '../../services/Api';
+import Title from '../../components/Title/Title';
 
 export default class UpdateBook extends Component {
     state = {
@@ -12,6 +13,7 @@ export default class UpdateBook extends Component {
         description: "",
         no_isbn: "",
         weight: "",
+        category_id: "",
         disabled: false
     };
 
@@ -32,7 +34,8 @@ export default class UpdateBook extends Component {
             image_url: response.data.image_url,
             price: response.data.price,
             no_isbn: response.data.no_isbn,
-            weight: response.data.weight
+            weight: response.data.weight,
+            category_id: response.data.category_id
         });
         console.log(response)
     };
@@ -45,7 +48,7 @@ export default class UpdateBook extends Component {
         await Axios.patch(`${HOST}/product/update/${id}`, qs.stringify(this.state), {
             headers: { Authorization: `Bearer ${JSON.stringify(localStorage.getItem('usertoken'))}` }
         });
-        this.props.history.push("/book-list")
+        this.props.history.push("/book-list-admin")
         console.log(this.state)
     };
 
@@ -53,8 +56,8 @@ export default class UpdateBook extends Component {
         console.log(this.state)
         return (
             <div className="container">
+                <Title name="Update " title="Book" />
                 <div className="col-md-6">
-                    <h2>Update Book</h2>
                     <form onSubmit={this.handlerSubmit}>
                         <div className="form-group">
                             <label htmlFor="name">Book Title</label>
@@ -137,6 +140,17 @@ export default class UpdateBook extends Component {
                                 onChange={this.handlerChange}
                                 name="weight"
                                 value={this.state.weight}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="category_id">Category_id</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                required
+                                onChange={this.handlerChange}
+                                name="category_id"
                             />
                         </div>
 
