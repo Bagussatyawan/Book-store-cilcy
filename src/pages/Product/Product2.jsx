@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Title from '../../components/Title/Title';
+import Title from '../../components/Title/Titlee';
 
 export default class Product2 extends Component {
     render() {

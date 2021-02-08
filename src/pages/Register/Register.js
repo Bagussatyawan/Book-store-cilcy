@@ -9,8 +9,7 @@ export default class Register extends Component {
             first_name: "",
             last_name: "",
             email: "",
-            password: "",
-            level: ""
+            password: ""
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -27,8 +26,7 @@ export default class Register extends Component {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             email: this.state.email,
-            password: this.state.password,
-            level: this.state.level
+            password: this.state.password
         }
 
         register(user).then(res => {
@@ -77,15 +75,6 @@ export default class Register extends Component {
                                     placeholder="Enter Your Password"
                                     required
                                     value={this.state.password}
-                                    onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="level">Level</label>
-                                <input type="level" className="form-control"
-                                    name="level"
-                                    placeholder="Choose Your Level"
-                                    required
-                                    value={this.state.level}
                                     onChange={this.onChange} />
                             </div>
                             <button type="submit" className="btn btn-lg btn-primary btn-block">

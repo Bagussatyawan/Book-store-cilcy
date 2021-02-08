@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { HOST } from '../../services/Api';
-import qs from 'querystring';
-import Title from '../../../src/components/Title/Title';
+import Title from '../../components/Title/Titlee';
 
 export default class AddBook extends Component {
     state = {
@@ -18,27 +17,32 @@ export default class AddBook extends Component {
     };
 
     handlerChange = (e) => {
-        let formData = new FormData();
-        if (e.target.name === 'thumbnail') {
-            formData.append('thumbnail', e.target.files[0], e.target.files[0].name)
-        }
-
-
-
-
-        this.setState({ [e.target.name]: e.target.name === 'thumbnail' ? formData : e.target.value })
-    };
+        this.setState({
+            [e.target.name]:
+                e.target.name === 'thumbnail' ? e.target.files[0] : e.target.value,
+        })
+    }
     // METHOD UNTUK CREATE BOOK
     handlerSubmit = async (event) => {
         event.preventDefault();
         this.setState({ disabled: true })
-        console.log('STATEYGDIKIRIM', this.state)
-        await Axios.post(`${HOST}/product/create`, this.state, {
-            headers: { Authorization: `Bearer ${JSON.stringify(localStorage.getItem('usertoken'))}` }
+        const formData = new FormData()
+        formData.append('name', this.state.name)
+        formData.append('author', this.state.author)
+        formData.append('price', this.state.price)
+        formData.append('thumbnail', this.state.thumbnail)
+        formData.append('description', this.state.description)
+        formData.append('no_isbn', this.state.no_isbn)
+        formData.append('weight', this.state.weight)
+        formData.append('category_id', this.state.category_id)
+        formData.append('user_id', this.state.user_id)
+
+        await Axios.post(`${HOST}/product/create`, formData, {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
         });
-        this.props.history.push("/book-list")
-        console.log(this.state)
+        this.props.history.push("/admin/book-list-admin")
     };
+
     render() {
         return (
             <div className="container">

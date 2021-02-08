@@ -6,7 +6,7 @@ import numeral from 'numeral';
 
 
 
-function CardBooks({ book, Addtocart }) {
+function CardCategories({ book, Addtocart }) {
 
     return (
         <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -33,5 +33,5 @@ function CardBooks({ book, Addtocart }) {
     )
 }
 
-export default CardBooks
+export default CardCategories
 

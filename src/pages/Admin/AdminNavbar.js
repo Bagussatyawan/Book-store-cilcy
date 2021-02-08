@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import Title from '../../components/Title/Title';
+import Title from '../../components/Title/Titlee';
 
 export default class AdminNavbar extends Component {
 
@@ -15,22 +15,22 @@ export default class AdminNavbar extends Component {
 
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link to="/book-list-admin" className="nav-link">
+                                <Link to="/admin/book-list-admin" className="nav-link">
                                     BOOK LIST
                             </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/admin" className="nav-link">
+                                <Link to="/admin/admin-addbook" className="nav-link">
                                     ADD BOOK
                             </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/categories-list" className="nav-link">
+                                <Link to="/admin/categories-list" className="nav-link">
                                     CATEGORY LIST
                             </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/add-categories" className="nav-link">
+                                <Link to="/admin/add-categories" className="nav-link">
                                     ADD CATEGORY
                             </Link>
                             </li>

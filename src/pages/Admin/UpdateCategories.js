@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import qs from 'querystring';
 import { HOST } from '../../services/Api';
-import Title from '../../components/Title/Title';
+import Title from '../../components/Title/Titlee';
 
 export default class UpdateCategories extends Component {
     state = {
@@ -17,12 +17,14 @@ export default class UpdateCategories extends Component {
 
     // METHOD FIND BY ID
     componentDidMount = async () => {
-        const id = this.props.match.params.id; // ERROR DISINI
+        const id = this.props.match.params.id;
         console.log(this.props.match.params)
-        const response = await Axios.get(`${HOST}/categories/get/${id}`);
+        const response = await Axios.get(`${HOST}/categories/get/${id}`, {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
+        });
         this.setState({
             id: id,
-            name: response.data.name
+            name: response.data.data.name
         });
         console.log(response)
     };
@@ -33,9 +35,9 @@ export default class UpdateCategories extends Component {
         event.preventDefault();
         this.setState({ disabled: true })
         await Axios.patch(`${HOST}/categories/update/${id}`, qs.stringify(this.state), {
-            headers: { Authorization: `Bearer ${JSON.stringify(localStorage.getItem('usertoken'))}` }
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
         });
-        this.props.history.push("/categories-list")
+        this.props.history.push("/admin/categories-list")
         console.log(this.state)
     };
 
@@ -43,7 +45,7 @@ export default class UpdateCategories extends Component {
         console.log(this.state)
         return (
             <div className="container">
-                <Title name="Add New " title="Category" />
+                <Title name="Update" title="Category" />
                 <div className="col-md-6">
                     <form onSubmit={this.handlerSubmit}>
                         <div className="form-group">
@@ -59,7 +61,7 @@ export default class UpdateCategories extends Component {
                         </div>
 
                         <button type="submit" className="btn btn-success" value="Publish" disabled={this.state.disabled}>
-                            Publish
+                            Update
                         </button>
                     </form>
                 </div>

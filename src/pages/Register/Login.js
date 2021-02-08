@@ -8,7 +8,7 @@ export default class loginn extends Component {
         this.state = {
             email: "",
             password: "",
-            level: "",
+
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -23,14 +23,13 @@ export default class loginn extends Component {
 
         const user = {
             email: this.state.email,
-            password: this.state.password,
-            level: this.state.level
+            password: this.state.password
         }
 
         login(user).then(res => {
-            if (res) {
-                this.props.history.push("/home")
-            }
+            if (res.data.level === "admin") {
+                this.props.history.push("admin/admin-navbar")
+            } else { this.props.history.push("/semua-koleksi-buku") }
         })
     }
 
@@ -59,15 +58,7 @@ export default class loginn extends Component {
                                     value={this.state.password}
                                     onChange={this.onChange} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="level">Level</label>
-                                <input type="level" className="form-control"
-                                    name="level"
-                                    placeholder="level"
-                                    required
-                                    value={this.state.level}
-                                    onChange={this.onChange} />
-                            </div>
+
                             <button type="submit" className="btn btn-lg btn-primary btn-block">
                                 Sign in
                            </button>

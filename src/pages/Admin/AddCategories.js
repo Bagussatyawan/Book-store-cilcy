@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { HOST } from '../../services/Api';
 import qs from 'querystring';
-import Title from '../../../src/components/Title/Title';
+import Title from '../../components/Title/Titlee';
 
 export default class AddCategories extends Component {
     state = {
@@ -18,9 +18,9 @@ export default class AddCategories extends Component {
         event.preventDefault();
         this.setState({ disabled: true })
         await Axios.post(`${HOST}/categories/create`, qs.stringify(this.state), {
-            headers: { Authorization: `Bearer ${JSON.stringify(localStorage.getItem('usertoken'))}` }
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
         });
-        this.props.history.push("/categories-list")
+        this.props.history.push("/admin/categories-list")
         console.log(this.state)
     };
     render() {

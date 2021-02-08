@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Title from '../../components/Title/Title';
-import { ProductConsumer } from '../../Context/Contex';
+import { ProductConsumer } from '../../../Context/Contex';
 import CartColumns from './CartColumn';
 import EmptyCart from './EmptyCart';
-import CartList from './CartList';
+import CartList from '../CartList';
 import CartTotal from './CartTotal';
 
 

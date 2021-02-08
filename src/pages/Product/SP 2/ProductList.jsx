@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Title from '../../components/Title/Title';
-import { ProductConsumer } from '../../Context/Contex';
+import { ProductConsumer } from '../../../Context/Contex';
 import Product from './Product';
 
 export default class ProductList extends Component {

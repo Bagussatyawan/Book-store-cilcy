@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Title from '../../../src/components/Title/Title'
+import Title from '../../components/Title/Titlee'
 import { HOST } from '../../services/Api';
 import axios from 'axios';
 import CardBook from './CardBook';
@@ -10,11 +10,13 @@ export default class Books extends Component {
     };
 
     componentDidMount = async () => {
-        await axios.get(`${HOST}/product/all`)
-            .then(response => this.setState({
-                book: response.data.data.rows
-            }))
+        await axios.get(`${HOST}/product/all`, {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
+        }).then(response => this.setState({
+            book: response.data.data.rows
+        }))
     };
+
     render() {
 
         const renderData =

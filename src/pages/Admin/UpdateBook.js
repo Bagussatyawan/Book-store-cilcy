@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import qs from 'querystring';
 import { HOST } from '../../services/Api';
-import Title from '../../components/Title/Title';
+import Title from '../../components/Title/Titlee';
 
 export default class UpdateBook extends Component {
     state = {
         name: "",
-        image_url: "",
+        thumbnail: "",
         author: "",
         price: "",
         description: "",
@@ -23,21 +23,23 @@ export default class UpdateBook extends Component {
 
     // METHOD FIND BY ID
     componentDidMount = async () => {
-        const id = this.props.match.params.id; // ERROR DISINI
+        const id = this.props.match.params.id;
         console.log(this.props.match.params)
-        const response = await Axios.get(`${HOST}/product/get/${id}`);
+        const response = await Axios.get(`${HOST}/product/get/${id}`, {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
+        });
         this.setState({
             id: id,
-            name: response.data.name,
-            description: response.data.description,
-            author: response.data.author,
-            image_url: response.data.image_url,
-            price: response.data.price,
-            no_isbn: response.data.no_isbn,
-            weight: response.data.weight,
-            category_id: response.data.category_id
+            name: response.data.data.name,
+            description: response.data.data.description,
+            author: response.data.data.author,
+            image_url: response.data.data.thumbnail,
+            price: response.data.data.price,
+            no_isbn: response.data.data.no_isbn,
+            weight: response.data.data.weight,
+            category_id: response.data.data.category_id
         });
-        console.log(response)
+
     };
 
     // METHOD UPDATE
@@ -46,9 +48,9 @@ export default class UpdateBook extends Component {
         event.preventDefault();
         this.setState({ disabled: true })
         await Axios.patch(`${HOST}/product/update/${id}`, qs.stringify(this.state), {
-            headers: { Authorization: `Bearer ${JSON.stringify(localStorage.getItem('usertoken'))}` }
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userdata')).access_token}` }
         });
-        this.props.history.push("/book-list-admin")
+        this.props.history.push("/admin/book-list-admin")
         console.log(this.state)
     };
 
@@ -96,14 +98,14 @@ export default class UpdateBook extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="image_url">Img_Url</label>
+                            <label htmlFor="thumbnail">Img_Url</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 required
                                 onChange={this.handlerChange}
-                                name="image_url"
-                                value={this.state.image_url}
+                                name="thumbnail"
+                                value={this.state.thumbnail}
                             />
                         </div>
 
